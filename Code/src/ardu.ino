@@ -10,11 +10,8 @@
 #define PIN_NEO_2 8
 #define PIN_NEO_3 9
 #define PIN_NEO_4 10
-#define PIN_NEO_5 11
-#define PIN_NEO_6 12
-#define PIN_NEO_7 13
 
-#define NUMBER_OF_STRANDS 8
+#define NUMBER_OF_STRANDS 5
 
 // Struct declaration, where member variables change how a pixel is lit
 typedef struct Pixel {
@@ -31,9 +28,6 @@ Adafruit_NeoPixel strip[NUMBER_OF_STRANDS] = {
   Adafruit_NeoPixel(60, PIN_NEO_2, NEO_GRB + NEO_KHZ800),
   Adafruit_NeoPixel(60, PIN_NEO_3, NEO_GRB + NEO_KHZ800),
   Adafruit_NeoPixel(60, PIN_NEO_4, NEO_GRB + NEO_KHZ800),
-  Adafruit_NeoPixel(60, PIN_NEO_5, NEO_GRB + NEO_KHZ800),
-  Adafruit_NeoPixel(60, PIN_NEO_6, NEO_GRB + NEO_KHZ800),
-  Adafruit_NeoPixel(60, PIN_NEO_7, NEO_GRB + NEO_KHZ800)
 };
 
 int transmission_number = 0;
@@ -79,7 +73,6 @@ void i2c_on_receive_handler(int bytes_num) {
       break;
     case 3:
       pixel.b = Wire.read();
-//      color_transition(pixel.r, pixel.g, pixel.b, pixel.brightness);
       for (int i = 0; i < NUMBER_OF_STRANDS; i++) { // Loop through every strand and every pixel to set colour
         for (uint16_t j = 0; j < strip[i].numPixels(); j++) {
           strip[i].setPixelColor(j, pixel.r, pixel.g, pixel.b);
@@ -90,42 +83,3 @@ void i2c_on_receive_handler(int bytes_num) {
       break;
   }
 }
-
-//void color_transition(int r, int g, int b, int brightness) {
-//  for (int i = 0; i <= 255; i++) {
-//    if (previous_pixel.r < r && i > previous_pixel.r && pixel.r < r) {
-//      pixel.r++;
-//    } else if (previous_pixel.r > r && i > r && pixel.r > r) {
-//      pixel.r--;
-//    }
-//
-//    if (previous_pixel.g < g && i > previous_pixel.g && pixel.g < g) {
-//      pixel.g++;
-//    } else if (previous_pixel.g > g && i > g && pixel.g > g) {
-//      pixel.g--;
-//    }
-//
-//    if (previous_pixel.b < b && i > previous_pixel.b && pixel.b < b) {
-//      pixel.b++;
-//    } else if (previous_pixel.b > b && i > b && pixel.b > b) {
-//      pixel.b--;
-//    }
-//
-//    for (int i = 0; i < NUMBER_OF_STRANDS; i++) { // Loop through every strand and every pixel to set colour
-//      for (uint16_t j = 0; j < strip[i].numPixels(); j++) {
-//        strip[i].setPixelColor(j, pixel.r, pixel.g, pixel.b);
-//        strip[i].show();
-//      }
-//    }
-//    
-//    delay(3);
-//  }
-//  
-//  previous_pixel = {
-//    .r = r,
-//    .g = g,
-//    .b = b,
-//    .brightness = brightness
-//  };
-//}
-
