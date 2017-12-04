@@ -4,7 +4,16 @@
   #include <avr/power.h>
 #endif
 
-#define PIN 6
+#define PIN0 6
+#define PIN1 7
+#define PIN2 8
+#define PIN3 9
+#define PIN4 10
+#define PIN5 11
+#define PIN6 12
+#define PIN7 13
+
+#define NUMBER_OF_STRANDS 8
 
 typedef struct Pixel {
   int r;
@@ -13,7 +22,17 @@ typedef struct Pixel {
   int brightness;
 } Pixel;
 
-Adafruit_NeoPixel strip = Adafruit_NeoPixel(60, PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip[NUMBER_OF_STRANDS] = {
+  Adafruit_NeoPixel(60, PIN0, NEO_GRB + NEO_KHZ800),
+  Adafruit_NeoPixel(60, PIN1, NEO_GRB + NEO_KHZ800),
+  Adafruit_NeoPixel(60, PIN2, NEO_GRB + NEO_KHZ800),
+  Adafruit_NeoPixel(60, PIN3, NEO_GRB + NEO_KHZ800),
+  Adafruit_NeoPixel(60, PIN4, NEO_GRB + NEO_KHZ800),
+  Adafruit_NeoPixel(60, PIN5, NEO_GRB + NEO_KHZ800),
+  Adafruit_NeoPixel(60, PIN6, NEO_GRB + NEO_KHZ800),
+  Adafruit_NeoPixel(60, PIN7, NEO_GRB + NEO_KHZ800)
+};
+
 int transmission_number = 0;
 Pixel pixel;
 
@@ -24,8 +43,10 @@ void setup() {
   Wire.begin(0x08);
   Wire.onReceive(i2c_on_receive_handler);
 
-  strip.begin();
-  strip.show();
+  for (int i = 0; i < NUMBER_OF_STRANDS; i++) {
+    strip[i].begin();
+    strip[i].show();
+  }
 }
 
 void loop() {
@@ -52,25 +73,14 @@ void i2c_on_receive_handler(int bytes_num) {
     case 3:
       pixel.b = Wire.read();
       transmission_number++;
-      for (uint16_t i = 0; i < strip.numPixels(); i++) {
-        strip.setPixelColor(i, pixel.r, pixel.g, pixel.b);
-        strip.setBrightness(pixel.brightness);
-        strip.show();
+      for (uint16_t i = 0; i < strip[0].numPixels(); i++) {
+        for (int j = 0; j < NUMBER_OF_STRANDS; j++) {
+          strip[j].setPixelColor(i, pixel.r, pixel.g, pixel.b);
+          strip[j].setBrightness(pixel.brightness);
+          strip[j].show();
+        }
       }
       transmission_number = 0;
       break;
   }
 }
-
-//uint32_t Wheel(byte WheelPos) {
-//  WheelPos = 255 - WheelPos;
-//  if(WheelPos < 85) {
-//    return strip.Color(255 - WheelPos * 3, 0, WheelPos * 3);
-//  }
-//  if(WheelPos < 170) {
-//    WheelPos -= 85;
-//    return strip.Color(0, WheelPos * 3, 255 - WheelPos * 3);
-//  }
-//  WheelPos -= 170;
-//  return strip.Color(WheelPos * 3, 255 - WheelPos * 3, 0);
-//}
