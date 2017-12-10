@@ -267,7 +267,6 @@ int L3G4200D::get_z_value() {
     return z_gyro;
 }
 
-
 /****************************** Pixel ******************************/
 /*  Struct declaration to hold data about how to light the Neopixels
     Typedef for convenience when initializing */

@@ -18,7 +18,7 @@ int main(const int argc, const char* const argv[]) {
 
 	std::cout << "Status after setup is " << status << std::endl;
 
-	usleep(500); // Sleep for 0.5 seconds to make sure that changes have propagated
+	sleep(1); // Sleep for 1 second to make sure that changes have propagated
 
 	// Allocate memory for buffer and read from accelerometer into the buffer
 	// 0x00 contains all the data from the accelerometer.
@@ -60,7 +60,7 @@ int main(const int argc, const char* const argv[]) {
 		std::cout << "Acceleration in the Y-Axis: " << y_accel << std::endl;
 		std::cout << "Acceleration in the Z-Axis: " << z_accel << std::endl;
 
-		usleep(100); // Sleep for 100 milliseconds to make it read nicer
+		sleep(100); // Sleep for 1 second to make it read nicer
 
 	}
 

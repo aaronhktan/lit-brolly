@@ -1,3 +1,8 @@
+/****************************** Arduino ******************************/
+/* A command line utility to set all the pixels to a specific colour
+ * Useful for testing the Neopixels
+ */
+
 #include <onion-i2c.h>
 #include <iostream>
 

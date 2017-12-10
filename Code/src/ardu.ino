@@ -1,3 +1,8 @@
+/****************************** Arduino Code ******************************/
+/* Runs on the Arduino to receive commands from Onion Omega2
+ * Quite sketchy.
+ */
+
 #include <Adafruit_NeoPixel.h>
 #include <Wire.h>
 #ifdef __AVR__

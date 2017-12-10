@@ -13,13 +13,13 @@ int main(const int argc, const char* const argv[]) {
 	// Writing 0x30 (48) to 0x23 (35) sets mode to continuous update, data lsbat lower address, fsr 2000dps, self-test enabled, and 4-wire interface
 	status = i2c_write(0, 0x168 0x23, 0x30, 8);
 
-	usleep(500); // Sleep for 0.5 seconds to make sure that changes have propagated
+	sleep(1); // Sleep for 1 second to make sure that changes have propagated
 
 
 	// Main loop
 	while (true) {
 
-		usleep(100); // Sleep for 0.1 seconds to delay
+		sleep(1); // Sleep for 1 second to delay
 
 		// Allocate memory for buffer and read from gyro into the buffers
 		// 0x28 (40) and 0x29 (41) contain all the x-axis data from the gyro, LSB first.
@@ -55,5 +55,8 @@ int main(const int argc, const char* const argv[]) {
 		cout << "Tilt in the X-Axis: " << x_gyro << endl;
 		cout << "Tilt in the Y-Axis: " << y_gyro << endl;
 		cout << "Tilt in the Z-Axis: " << z_gyro << endl;
+
+		delete[] buffer0;
+		delete[] buffer1;
 	}
 }
