@@ -66,9 +66,13 @@ Program to test the accelerometer. No command line arguments required.
 ## Miscellaneous
 ### Acknowledgements
 Big thanks to Austin Jiang for his vehicle.
+
 Big thanks to (Aaaaaaaaaaaaaaaaaaaaaaaa)Kash Pirani for his soldering and head patting skills.
+
 Big thanks to Edward Yang and Shun Yu Rao for moral support and their USB sticks.
+
 Big thanks to Google Assistant, Cortana, and Siri for turning on and off the lights.
+
 Big thanks to Ferrero Rocher for being the Official Snack Food™ of this project.
 
 ### License
