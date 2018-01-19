@@ -4,12 +4,15 @@
 
 A project by Aaron Tan, Lily Yang, and Hengcheng Yu to make your brollies lit. The LEDs change colour based on the movement detected by the accelerometer!
 
+![alt tag](https://github.com/cheeseisdisgusting/lit-brolly/blob/master/Docs/Resources/lit-brolly-trimmed.gif)
+
 ---
 
 ### Contents
 1. [Setup](#setup)
 	- [Requirements](#requirements)
 	- [Compilation](#compilation)
+	- [Hardware](#hardware)
 	- [Execution](#execution)
 2. [Usage](#usage)
 	- [Synergy](#synergy)
@@ -25,19 +28,29 @@ A project by Aaron Tan, Lily Yang, and Hengcheng Yu to make your brollies lit. T
 ### Requirements
 - Onion Omega2 (should work with the 2+ but this has not been tested)
 - Arduino Dock R2
+- Neopixels
+- ADXL345 accelerometer
 - Time. Lots of it.
 
 ### Compilation
-- Set up the virtual machine as described in the PDF labelled "SetupCrossCompilingEnvironmentV1.pdf". In the ```make menuconfig``` step, include the onioni2c library. This will take upwards of an hour of your time.
-- Modify the target of the makefile under the compile folder to the name of the file that you wish to compile. By default, it will try to compile Synergy.cpp.
-- Move the file you want to compile into the same folder as your makefile and xCompile.sh.
-- Once the makefile, the target, and xCompile.sh are in the same folder, run xCompile.sh as described in the PDF labelled "CompilingCppCodeOmega.pdf". An executable file will be generated in the same folder.
+
+** Note: Pre-compiled executables are available in the folder ```Code/executable```. Only follow the instructions under the Compilation heading if you really want to compile from source. **
+
+- Set up the virtual machine as described in the PDF labelled "SetupCrossCompilingEnvironmentV1.pdf" in ```Docs/Compile```. In the ```make menuconfig``` step, include the onioni2c library. This will take upwards of an hour of your time.
+- Modify the target of the makefile under the compile folder to the name of the file that you wish to compile. By default, it will try to compile ```Synergy.cpp```.
+- Move the file you want to compile into the same folder as your ```makefile``` and ```xCompile.sh```.
+- Once the makefile, the target, and xCompile.sh are in the same folder, run xCompile.sh as described in the PDF labelled "CompilingCppCodeOmega.pdf" in ```Docs/Compile```. An executable file will be generated in the same folder.
+
+### Hardware
+- Solder the Neopixels and hook them up to the Arduino Dock R2 headers as described in the schematic under ```Docs/Schematics```. This project supports hooking up to five strands of Neopixels; connect the power wires in series and data pins to 6, 7, 8, 9, and 10 on the Arduino Dock R2 headers.
+- Solder header pins on the ADXL345 as necessary and hook them up to the Onion Expansion headers as described in the schematic under ```Docs/Schematics```.
+- A breadboard may prove handy for cable management and organization. See ```Example.png``` under ```Docs/Schematics``` for an real-life example of this schematic put together.
 
 ### Execution
 - Move your executable to a USB stick, then mount it on your Omega:
 	- Connect to your Omega's Wi-Fi network, then using PuTTY on Windows or your terminal on Mac/Linux: ```ssh root@192.168.3.1```. You will need to type in the password for the Omega2: default is onioneer.
 	- In the terminal: ```mkdir /mnt/usb``` (first time only, making a directory to be the mount point for your USB stick) then ```mount /dev/sda1 /mnt/usb``` (actually mounting the USB)
-- Connect to the Arduino Dock (I prefer wirelessly, but it shouldn't matter), and upload the ```ardu.ino``` sketch under Code/src/.
+- Connect to the Arduino Dock (I prefer wirelessly, but it shouldn't matter), and upload the ```ardu.ino``` sketch under ```Code/src```.
 - Run Synergy from the command line: ```/mnt/usb/Synergy``` (assuming you followed the previous directions)
 - If you wire up the Neopixels correctly (i.e. the way it's described under the "Final Project Report" appendix), then you should see your Neopixels light up when you move around the accelerometer!
 
