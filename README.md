@@ -34,7 +34,7 @@ A project by Aaron Tan, Lily Yang, and Hengcheng Yu to make your brollies lit. T
 
 ### Compilation
 
-** Note: Pre-compiled executables are available in the folder ```Code/executable```. Only follow the instructions under the Compilation heading if you really want to compile from source. **
+**Note: Pre-compiled executables are available in the folder ```Code/executable```. Only follow the instructions under the Compilation heading if you really want to compile from source.**
 
 - Set up the virtual machine as described in the PDF labelled "SetupCrossCompilingEnvironmentV1.pdf" in ```Docs/Compile```. In the ```make menuconfig``` step, include the onioni2c library. This will take upwards of an hour of your time.
 - Modify the target of the makefile under the compile folder to the name of the file that you wish to compile. By default, it will try to compile ```Synergy.cpp```.
