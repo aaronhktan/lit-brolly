@@ -2,7 +2,7 @@
 
 *Nōn omne quod nitet aurum est.*
 
-A project by Aaron Tan, Lily Yang, and Hengcheng Yu to make your brollies lit. The LEDs change colour based on the movement detected by the accelerometer!
+A project by Aaron Tan, Lily Yang, and [Hengcheng Yu](https://github.com/handchan) to make your brollies lit. The LEDs change colour based on the movement detected by the accelerometer!
 
 ![alt tag](https://github.com/cheeseisdisgusting/lit-brolly/blob/master/Docs/Resources/lit-brolly-trimmed.gif)
 
